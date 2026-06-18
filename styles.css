@@ -527,4 +527,88 @@ padding:
 
 }
 
+}@media (max-width: 700px) {
+  body {
+    background: url("assets/mobile-bg.png") center top / cover no-repeat fixed;
+    min-height: 100vh;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .app {
+    padding: 30px 12px;
+    max-width: 100%;
+  }
+
+  h4 {
+    font-size: 14px;
+    letter-spacing: 8px;
+  }
+
+  h1 {
+    font-size: 46px;
+    line-height: .95;
+    margin-top: 160px;
+  }
+
+  h1 small {
+    font-size: 24px;
+    letter-spacing: 10px;
+  }
+
+  .app > p {
+    font-size: 16px;
+  }
+
+  .panel {
+    margin-top: 20px;
+    padding: 18px;
+    border-radius: 24px;
+    background: rgba(2, 6, 23, .65);
+  }
+
+  .game-buttons {
+    gap: 10px;
+    border: none;
+  }
+
+  .game-btn {
+    border-radius: 16px;
+    font-size: 16px;
+    padding: 14px 8px;
+  }
+
+  .balls {
+    gap: 8px;
+  }
+
+  .balls span {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 18px;
+    padding: 18px;
+  }
+
+  .action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+
+  .action-buttons button {
+    font-size: 13px;
+    padding: 12px 6px;
+  }
+
+  .daily-box {
+    text-align: center;
+    padding: 16px;
+  }
 }
