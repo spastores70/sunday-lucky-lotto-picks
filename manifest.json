@@ -1,0 +1,22 @@
+{
+  "name": "Sunday Lucky Lotto Picks",
+  "short_name": "Lucky Lotto",
+  "description": "Random Powerball and Mega Millions lucky number picker.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#dc2626",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

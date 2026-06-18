@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunday Lucky Lotto Picks</title>
+
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#dc2626">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <main class="app">
+
+    <header class="hero">
+      <h4>— SUNDAY —</h4>
+      <h1>
+        <span>LUCKY</span>
+        LOTTO
+        <small>★ PICKS ★</small>
+      </h1>
+      <p>Your lucky numbers. Your moment.</p>
+    </header>
+
+    <section class="card">
+
+      <div class="game-buttons">
+        <button class="game-btn active" onclick="selectGame('powerball')" id="powerballBtn">
+          POWERBALL
+        </button>
+
+        <button class="game-btn" onclick="selectGame('mega')" id="megaBtn">
+          MEGA MILLIONS
+        </button>
+      </div>
+
+      <h3>YOUR LUCKY NUMBERS</h3>
+
+      <div class="balls" id="balls">
+        <span>?</span>
+        <span>?</span>
+        <span>?</span>
+        <span>?</span>
+        <span>?</span>
+        <span class="special">?</span>
+      </div>
+
+      <p id="rules">White Balls (1-69) + Powerball (1-26)</p>
+
+      <button class="main-btn" onclick="generateNumbers()">
+        🎰 GENERATE LUCKY NUMBERS
+      </button>
+
+      <div class="action-grid">
+        <button onclick="generateNumbers()">🔄<strong>Quick Pick</strong><small>New numbers</small></button>
+        <button onclick="savePick()">⭐<strong>Save Pick</strong><small>Save for later</small></button>
+        <button onclick="copyPick()">📋<strong>Copy Pick</strong><small>Copy to clipboard</small></button>
+        <button onclick="toggleHistory()">🕘<strong>History</strong><small>View past picks</small></button>
+      </div>
+
+      <div id="savedPick" class="saved-pick"></div>
+
+      <div class="bottom-grid">
+
+        <div class="daily-box">
+          <h3>🌞 DAILY LUCKY PICK</h3>
+          <p id="dailyPick">Get one lucky pick per game per day!</p>
+          <button onclick="getDailyPick()">GET TODAY'S PICK</button>
+        </div>
+
+        <div id="historyBox" class="history-box">
+          <h3>PICK HISTORY</h3>
+          <div id="historyList"></div>
+          <button onclick="clearHistory()">Clear History</button>
+        </div>
+
+      </div>
+
+      <p class="disclaimer">⭐ For entertainment purposes only. Play responsibly. ⭐</p>
+
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
