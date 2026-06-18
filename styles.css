@@ -10,19 +10,18 @@ font-family:
 Arial,
 sans-serif;
 
-min-height:
-100vh;
-
 color:
 white;
 
-/* YOUR GENERATED BG */
+min-height:
+100vh;
 
-background-image:
+background:
 linear-gradient(
-rgba(0,0,0,.12),
-rgba(0,0,0,.45)
+rgba(0,0,0,.08),
+rgba(0,0,0,.35)
 ),
+
 url("assets/lotto-bg.png");
 
 background-size:
@@ -42,116 +41,37 @@ hidden;
 
 }
 
-/* MAIN LAYOUT */
+/* MAIN */
 
 .app{
 
 max-width:
-1100px;
+1000px;
 
 margin:
 auto;
 
-/* MOVED LOWER */
+/* PUSH CONTENT BELOW BG TITLE */
 
 padding:
-260px 20px 40px;
+520px 20px 50px;
 
 text-align:
 center;
 
 }
 
-/* TITLE */
+/* REMOVE HERO */
 
 .hero{
 
-margin-bottom:
-30px;
+display:none;
 
 }
 
-.hero h4{
-
-letter-spacing:
-14px;
-
-font-size:
-26px;
-
-color:
-white;
-
-text-shadow:
-0 6px 20px black;
-
-margin-bottom:
-10px;
-
-}
-
-.hero h1{
-
-font-size:
-86px;
-
-line-height:
-.9;
-
-font-weight:
-900;
-
-text-shadow:
-0 10px 25px black;
-
-}
-
-.hero h1 span{
-
-display:block;
-
-color:
-gold;
-
-}
-
-.hero h1 small{
-
-display:block;
-
-font-size:
-34px;
-
-letter-spacing:
-12px;
-
-color:
-gold;
-
-margin-top:
-14px;
-
-}
-
-.hero p{
-
-margin-top:
-18px;
-
-font-size:
-24px;
-
-color:
-#dbeafe;
-
-}
-
-/* CARD */
+/* MAIN GLASS */
 
 .card{
-
-margin-top:
-40px;
 
 padding:
 35px;
@@ -160,22 +80,39 @@ border-radius:
 35px;
 
 background:
-rgba(2,6,23,.72);
+rgba(
+2,
+6,
+23,
+.35
+);
 
 backdrop-filter:
-blur(10px);
+blur(
+18px
+);
 
 border:
-2px solid
-rgba(96,165,250,.45);
+1px solid
+rgba(
+255,
+255,
+255,
+.08
+);
 
 box-shadow:
-0 0 40px
-rgba(59,130,246,.5);
+0 0 50px
+rgba(
+0,
+0,
+0,
+.35
+);
 
 }
 
-/* GAME BUTTONS */
+/* GAME */
 
 .game-buttons{
 
@@ -188,25 +125,25 @@ gap:
 14px;
 
 margin-bottom:
-30px;
+35px;
 
 }
 
 .game-btn{
 
-padding:
-22px;
+height:
+110px;
+
+border:none;
+
+border-radius:
+25px;
 
 font-size:
-24px;
+30px;
 
 font-weight:
 900;
-
-border-radius:
-18px;
-
-border:none;
 
 color:
 white;
@@ -215,7 +152,12 @@ cursor:
 pointer;
 
 background:
-rgba(255,255,255,.08);
+rgba(
+0,
+0,
+0,
+.45
+);
 
 }
 
@@ -228,8 +170,13 @@ linear-gradient(
 );
 
 box-shadow:
-0 0 20px
-rgba(255,0,0,.8);
+0 0 35px
+rgba(
+255,
+0,
+0,
+.8
+);
 
 }
 
@@ -243,23 +190,23 @@ justify-content:
 center;
 
 gap:
-16px;
+18px;
 
 flex-wrap:
 wrap;
 
 margin:
-30px 0;
+40px 0;
 
 }
 
 .balls span{
 
 width:
-92px;
+100px;
 
 height:
-92px;
+100px;
 
 border-radius:
 50%;
@@ -269,14 +216,14 @@ white;
 
 display:flex;
 
-align-items:
-center;
-
 justify-content:
 center;
 
+align-items:
+center;
+
 font-size:
-42px;
+48px;
 
 font-weight:
 900;
@@ -285,39 +232,53 @@ color:
 black;
 
 box-shadow:
-0 15px 30px
-rgba(0,0,0,.5);
+0 12px 30px
+rgba(
+0,
+0,
+0,
+.5
+);
 
 }
 
 .special{
 
 background:
-#dc2626 !important;
+#ef4444 !important;
 
 color:
 white !important;
 
 }
 
-/* MAIN BUTTON */
+/* RULE */
+
+#rules{
+
+font-size:
+22px;
+
+margin-bottom:
+25px;
+
+}
+
+/* MAIN BTN */
 
 .main-btn{
-
-margin:
-25px auto;
 
 width:
 90%;
 
 max-width:
-700px;
+760px;
 
 padding:
-22px;
+28px;
 
 font-size:
-24px;
+34px;
 
 font-weight:
 900;
@@ -325,7 +286,7 @@ font-weight:
 border:none;
 
 border-radius:
-18px;
+20px;
 
 cursor:
 pointer;
@@ -339,9 +300,12 @@ linear-gradient(
 color:
 #111827;
 
+margin-bottom:
+40px;
+
 }
 
-/* ACTION BUTTONS */
+/* ACTIONS */
 
 .action-grid{
 
@@ -354,31 +318,33 @@ repeat(
 );
 
 gap:
-14px;
-
-margin-top:
-25px;
+16px;
 
 }
 
 .action-grid button{
 
-min-height:
-120px;
-
 padding:
-18px;
+28px;
+
+min-height:
+160px;
+
+border:none;
 
 border-radius:
-18px;
+20px;
 
 background:
-rgba(255,255,255,.08);
+rgba(
+0,
+0,
+0,
+.45
+);
 
 color:
 white;
-
-border:none;
 
 cursor:
 pointer;
@@ -392,6 +358,9 @@ display:block;
 margin-top:
 10px;
 
+font-size:
+22px;
+
 }
 
 .action-grid small{
@@ -399,14 +368,41 @@ margin-top:
 display:block;
 
 margin-top:
-5px;
+8px;
 
-opacity:
-.8;
+font-size:
+15px;
 
 }
 
-/* DAILY */
+/* LOWER */
+
+.saved-pick{
+
+margin-top:
+25px;
+
+padding:
+20px;
+
+border-radius:
+18px;
+
+background:
+rgba(
+0,
+0,
+0,
+.45
+);
+
+color:
+gold;
+
+font-size:
+22px;
+
+}
 
 .bottom-grid{
 
@@ -427,39 +423,40 @@ margin-top:
 .history-box{
 
 padding:
-22px;
-
-border-radius:
-22px;
-
-background:
-rgba(255,255,255,.08);
-
-}
-
-.saved-pick{
-
-margin-top:
 25px;
 
-color:
-gold;
+border-radius:
+20px;
 
-font-size:
-18px;
+background:
+rgba(
+0,
+0,
+0,
+.45
+);
 
 }
 
-/* HISTORY */
+.daily-box button,
+.history-box button{
 
-.history-item{
+margin-top:
+18px;
 
 padding:
-10px;
+14px 24px;
 
-border-bottom:
-1px solid
-rgba(255,255,255,.1);
+border:none;
+
+border-radius:
+12px;
+
+background:
+gold;
+
+cursor:
+pointer;
 
 }
 
@@ -472,21 +469,7 @@ max-width:768px
 .app{
 
 padding:
-180px 15px 30px;
-
-}
-
-.hero h1{
-
-font-size:
-54px;
-
-}
-
-.hero h1 small{
-
-font-size:
-24px;
+350px 12px 40px;
 
 }
 
@@ -511,25 +494,35 @@ grid-template-columns:
 
 }
 
+.game-btn{
+
+height:
+80px;
+
+font-size:
+20px;
+
+}
+
 .balls span{
 
 width:
-64px;
+68px;
 
 height:
-64px;
+68px;
 
 font-size:
-26px;
+30px;
 
 }
 
 .main-btn{
 
-width:
-100%;
-
 font-size:
+20px;
+
+padding:
 18px;
 
 }
