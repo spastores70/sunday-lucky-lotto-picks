@@ -203,3 +203,402 @@ if ("serviceWorker" in navigator) {
 
 loadSavedPick();
 renderHistory();
+/* =========================================================
+   BIRTHDAY DAILY LOTTO COMBINATION
+========================================================= */
+
+let selectedBirthdayGame = "powerball";
+let birthdaySpinTimer = null;
+
+function selectBirthdayGame(game) {
+  selectedBirthdayGame = game;
+
+  const powerballButton =
+    document.getElementById("birthdayPowerballBtn");
+
+  const megaButton =
+    document.getElementById("birthdayMegaBtn");
+
+  const ballsContainer =
+    document.getElementById("birthdayBalls");
+
+  powerballButton.classList.remove("active");
+  megaButton.classList.remove("active");
+  ballsContainer.classList.remove("mega-mode");
+
+  if (game === "powerball") {
+    powerballButton.classList.add("active");
+  } else {
+    megaButton.classList.add("active");
+    ballsContainer.classList.add("mega-mode");
+  }
+
+  resetBirthdayBalls();
+  loadBirthdayLuckyCombination();
+}
+
+function resetBirthdayBalls() {
+  const balls =
+    document.querySelectorAll("#birthdayBalls span");
+
+  balls.forEach((ball) => {
+    ball.textContent = "?";
+    ball.classList.remove(
+      "slot-spinning",
+      "slot-winner"
+    );
+  });
+
+  document.getElementById(
+    "birthdayLuckyMessage"
+  ).textContent =
+    "Enter a birthday and reveal today’s lucky pick.";
+
+  document.getElementById(
+    "birthdayLuckyDate"
+  ).textContent = "";
+}
+
+function getLocalDateKey() {
+  const today = new Date();
+
+  return [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0")
+  ].join("-");
+}
+
+function createSeedFromText(text) {
+  let hash = 2166136261;
+
+  for (let index = 0; index < text.length; index++) {
+    hash ^= text.charCodeAt(index);
+
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return hash >>> 0;
+}
+
+function seededRandom(seed) {
+  let state = seed >>> 0;
+
+  return function randomValue() {
+    state += 0x6d2b79f5;
+
+    let result = state;
+
+    result = Math.imul(
+      result ^ (result >>> 15),
+      result | 1
+    );
+
+    result ^= result +
+      Math.imul(
+        result ^ (result >>> 7),
+        result | 61
+      );
+
+    return (
+      (result ^ (result >>> 14)) >>> 0
+    ) / 4294967296;
+  };
+}
+
+function createUniqueSeededNumbers(
+  count,
+  maximum,
+  random
+) {
+  const numbers = [];
+
+  while (numbers.length < count) {
+    const number =
+      Math.floor(random() * maximum) + 1;
+
+    if (!numbers.includes(number)) {
+      numbers.push(number);
+    }
+  }
+
+  return numbers.sort((a, b) => a - b);
+}
+
+function calculateBirthdayCombination(
+  birthdayValue,
+  game
+) {
+  const dateKey = getLocalDateKey();
+
+  const seedText =
+    `${birthdayValue}|${dateKey}|${game}`;
+
+  const random = seededRandom(
+    createSeedFromText(seedText)
+  );
+
+  const isMega = game === "mega";
+
+  const whiteMaximum = isMega ? 70 : 69;
+  const specialMaximum = isMega ? 24 : 26;
+
+  const whiteNumbers =
+    createUniqueSeededNumbers(
+      5,
+      whiteMaximum,
+      random
+    );
+
+  const specialNumber =
+    Math.floor(random() * specialMaximum) + 1;
+
+  return {
+    game,
+    whiteNumbers,
+    specialNumber,
+    dateKey
+  };
+}
+
+function generateBirthdayLuckyCombination() {
+  const birthdayInput =
+    document.getElementById("birthdayInput");
+
+  const birthdayValue = birthdayInput.value;
+
+  if (!birthdayValue) {
+    alert("Please enter the person’s birthday.");
+    birthdayInput.focus();
+    return;
+  }
+
+  const selectedBirthday = new Date(
+    `${birthdayValue}T12:00:00`
+  );
+
+  if (
+    Number.isNaN(selectedBirthday.getTime()) ||
+    selectedBirthday > new Date()
+  ) {
+    alert("Please enter a valid birthday.");
+    birthdayInput.focus();
+    return;
+  }
+
+  const result = calculateBirthdayCombination(
+    birthdayValue,
+    selectedBirthdayGame
+  );
+
+  spinBirthdayCombination(result);
+}
+
+function spinBirthdayCombination(result) {
+  const balls =
+    document.querySelectorAll("#birthdayBalls span");
+
+  const button =
+    document.getElementById("birthdayLuckyButton");
+
+  const message =
+    document.getElementById("birthdayLuckyMessage");
+
+  if (birthdaySpinTimer) {
+    clearInterval(birthdaySpinTimer);
+  }
+
+  button.disabled = true;
+  button.textContent = "🎰 Spinning...";
+
+  message.textContent =
+    "The birthday lucky machine is spinning...";
+
+  balls.forEach((ball) => {
+    ball.classList.remove("slot-winner");
+    ball.classList.add("slot-spinning");
+  });
+
+  const isMega = result.game === "mega";
+  const whiteMaximum = isMega ? 70 : 69;
+  const specialMaximum = isMega ? 24 : 26;
+
+  let spins = 0;
+  const maximumSpins = 32;
+
+  birthdaySpinTimer = setInterval(() => {
+    balls.forEach((ball, index) => {
+      const maximum =
+        index === 5
+          ? specialMaximum
+          : whiteMaximum;
+
+      ball.textContent =
+        Math.floor(Math.random() * maximum) + 1;
+    });
+
+    spins++;
+
+    if (spins >= maximumSpins) {
+      clearInterval(birthdaySpinTimer);
+      birthdaySpinTimer = null;
+
+      revealBirthdayCombination(result);
+    }
+  }, 70);
+}
+
+function revealBirthdayCombination(result) {
+  const balls =
+    document.querySelectorAll("#birthdayBalls span");
+
+  const button =
+    document.getElementById("birthdayLuckyButton");
+
+  result.whiteNumbers.forEach(
+    (number, index) => {
+      balls[index].textContent = number;
+    }
+  );
+
+  balls[5].textContent = result.specialNumber;
+
+  balls.forEach((ball, index) => {
+    ball.classList.remove("slot-spinning");
+
+    setTimeout(() => {
+      ball.classList.add("slot-winner");
+    }, index * 100);
+  });
+
+  const gameName =
+    result.game === "mega"
+      ? "Mega Millions"
+      : "Powerball";
+
+  const specialName =
+    result.game === "mega"
+      ? "Mega Ball"
+      : "Powerball";
+
+  document.getElementById(
+    "birthdayLuckyMessage"
+  ).textContent =
+    `${gameName}: ` +
+    `${result.whiteNumbers.join(" - ")} | ` +
+    `${specialName} ${result.specialNumber}`;
+
+  document.getElementById(
+    "birthdayLuckyDate"
+  ).textContent =
+    `Birthday-based pick for ${formatTodayForDisplay()}`;
+
+  button.disabled = false;
+  button.textContent =
+    "🎰 Reveal Birthday Lucky Pick";
+
+  saveBirthdayLuckyCombination(result);
+}
+
+function getBirthdayStorageKey(
+  birthdayValue,
+  game
+) {
+  return [
+    "birthdayLottoPick",
+    birthdayValue,
+    getLocalDateKey(),
+    game
+  ].join("-");
+}
+
+function saveBirthdayLuckyCombination(result) {
+  const birthdayValue =
+    document.getElementById(
+      "birthdayInput"
+    ).value;
+
+  const storageKey = getBirthdayStorageKey(
+    birthdayValue,
+    result.game
+  );
+
+  const record = {
+    birthday: birthdayValue,
+    game: result.game,
+    whiteNumbers: result.whiteNumbers,
+    specialNumber: result.specialNumber,
+    generatedDate: result.dateKey
+  };
+
+  localStorage.setItem(
+    storageKey,
+    JSON.stringify(record)
+  );
+}
+
+function loadBirthdayLuckyCombination() {
+  const birthdayInput =
+    document.getElementById("birthdayInput");
+
+  const birthdayValue = birthdayInput.value;
+
+  if (!birthdayValue) {
+    return;
+  }
+
+  const storageKey = getBirthdayStorageKey(
+    birthdayValue,
+    selectedBirthdayGame
+  );
+
+  const savedRecord =
+    localStorage.getItem(storageKey);
+
+  if (!savedRecord) {
+    return;
+  }
+
+  try {
+    const record = JSON.parse(savedRecord);
+
+    revealBirthdayCombination(record);
+  } catch (error) {
+    console.error(
+      "Unable to load birthday lotto pick:",
+      error
+    );
+
+    localStorage.removeItem(storageKey);
+  }
+}
+
+function formatTodayForDisplay() {
+  return new Date().toLocaleDateString(
+    undefined,
+    {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric"
+    }
+  );
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    const birthdayInput =
+      document.getElementById("birthdayInput");
+
+    birthdayInput.addEventListener(
+      "change",
+      () => {
+        resetBirthdayBalls();
+        loadBirthdayLuckyCombination();
+      }
+    );
+
+    selectBirthdayGame("powerball");
+  }
+);
