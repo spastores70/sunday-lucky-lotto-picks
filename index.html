@@ -8,18 +8,11 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#dc2626">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
-
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-
   <main class="app">
-
-    
-
     <section class="card">
-
       <div class="game-buttons">
         <button class="game-btn active" onclick="selectGame('powerball')" id="powerballBtn">
           POWERBALL
@@ -43,6 +36,70 @@
 
       <p id="rules">White Balls (1-69) + Powerball (1-26)</p>
 
+      <section class="birthday-lucky-box">
+        <div class="birthday-heading">
+          <span class="birthday-icon">🎂</span>
+          <div>
+            <h3>Birthday Lucky Lotto Pick</h3>
+            <p>Enter a birthday to reveal today’s personal Powerball or Mega Millions combination.</p>
+          </div>
+        </div>
+
+        <div class="birthday-form">
+          <label for="birthdayInput">Person’s birthday</label>
+
+          <input
+            type="date"
+            id="birthdayInput"
+            autocomplete="bday"
+          />
+
+          <div class="birthday-game-buttons">
+            <button
+              type="button"
+              id="birthdayPowerballBtn"
+              class="birthday-game-btn active"
+              onclick="selectBirthdayGame('powerball')"
+            >
+              Powerball
+            </button>
+
+            <button
+              type="button"
+              id="birthdayMegaBtn"
+              class="birthday-game-btn"
+              onclick="selectBirthdayGame('mega')"
+            >
+              Mega Millions
+            </button>
+          </div>
+
+          <button
+            type="button"
+            id="birthdayLuckyButton"
+            onclick="generateBirthdayLuckyCombination()"
+          >
+            🎰 Reveal Birthday Lucky Pick
+          </button>
+        </div>
+
+        <div class="birthday-slot-machine">
+          <p class="slot-label">TODAY’S BIRTHDAY LUCKY PICK</p>
+
+          <div class="birthday-balls" id="birthdayBalls">
+            <span>?</span>
+            <span>?</span>
+            <span>?</span>
+            <span>?</span>
+            <span>?</span>
+            <span class="birthday-special">?</span>
+          </div>
+
+          <p id="birthdayLuckyMessage">Enter a birthday and choose a game.</p>
+          <p id="birthdayLuckyDate"></p>
+        </div>
+      </section>
+
       <button class="main-btn" onclick="generateNumbers()">
         🎰 GENERATE LUCKY NUMBERS
       </button>
@@ -57,7 +114,6 @@
       <div id="savedPick" class="saved-pick"></div>
 
       <div class="bottom-grid">
-
         <div class="daily-box">
           <h3>🌞 DAILY LUCKY PICK</h3>
           <p id="dailyPick">Get one lucky pick per game per day!</p>
@@ -69,83 +125,10 @@
           <div id="historyList"></div>
           <button onclick="clearHistory()">Clear History</button>
         </div>
-
       </div>
 
       <p class="disclaimer">⭐ For entertainment purposes only. Play responsibly. ⭐</p>
-
     </section>
-   <section class="birthday-lucky-box">
-  <div class="birthday-heading">
-    <span class="birthday-icon">🎂</span>
-
-    <div>
-      <h3>Birthday Lucky Lotto Pick</h3>
-      <p>
-        Enter a birthday to reveal today’s personal
-        Powerball or Mega Millions combination.
-      </p>
-    </div>
-  </div>
-
-  <div class="birthday-form">
-    <label for="birthdayInput">Person’s birthday</label>
-
-    <input
-      type="date"
-      id="birthdayInput"
-      autocomplete="bday"
-    />
-
-    <div class="birthday-game-buttons">
-      <button
-        type="button"
-        id="birthdayPowerballBtn"
-        class="birthday-game-btn active"
-        onclick="selectBirthdayGame('powerball')"
-      >
-        Powerball
-      </button>
-
-      <button
-        type="button"
-        id="birthdayMegaBtn"
-        class="birthday-game-btn"
-        onclick="selectBirthdayGame('mega')"
-      >
-        Mega Millions
-      </button>
-    </div>
-
-    <button
-      type="button"
-      id="birthdayLuckyButton"
-      onclick="generateBirthdayLuckyCombination()"
-    >
-      🎰 Reveal Birthday Lucky Pick
-    </button>
-  </div>
-
-  <div class="birthday-slot-machine">
-    <p class="slot-label">TODAY’S BIRTHDAY LUCKY PICK</p>
-
-    <div class="birthday-balls" id="birthdayBalls">
-      <span>?</span>
-      <span>?</span>
-      <span>?</span>
-      <span>?</span>
-      <span>?</span>
-      <span class="birthday-special">?</span>
-    </div>
-
-    <p id="birthdayLuckyMessage">
-      Enter a birthday and choose a game.
-    </p>
-
-    <p id="birthdayLuckyDate"></p>
-  </div>
-</section>
-
   </main>
 
   <script src="script.js"></script>
