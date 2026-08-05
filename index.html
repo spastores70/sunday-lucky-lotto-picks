@@ -13,28 +13,6 @@
 <body>
   <main class="app">
     <section class="card">
-      <div class="game-buttons">
-        <button class="game-btn active" onclick="selectGame('powerball')" id="powerballBtn">
-          POWERBALL
-        </button>
-
-        <button class="game-btn" onclick="selectGame('mega')" id="megaBtn">
-          MEGA MILLIONS
-        </button>
-      </div>
-
-      <h3>YOUR LUCKY NUMBERS</h3>
-
-      <div class="balls" id="balls">
-        <span>?</span>
-        <span>?</span>
-        <span>?</span>
-        <span>?</span>
-        <span>?</span>
-        <span class="special">?</span>
-      </div>
-
-      <p id="rules">White Balls (1-69) + Powerball (1-26)</p>
 
       <section class="birthday-lucky-box">
         <div class="birthday-heading">
@@ -99,6 +77,29 @@
           <p id="birthdayLuckyDate"></p>
         </div>
       </section>
+
+      <div class="game-buttons">
+        <button class="game-btn active" onclick="selectGame('powerball')" id="powerballBtn">
+          POWERBALL
+        </button>
+
+        <button class="game-btn" onclick="selectGame('mega')" id="megaBtn">
+          MEGA MILLIONS
+        </button>
+      </div>
+
+      <h3>YOUR LUCKY NUMBERS</h3>
+
+      <div class="balls" id="balls">
+        <span>?</span>
+        <span>?</span>
+        <span>?</span>
+        <span>?</span>
+        <span>?</span>
+        <span class="special">?</span>
+      </div>
+
+      <p id="rules">White Balls (1-69) + Powerball (1-26)</p>
 
       <button class="main-btn" onclick="generateNumbers()">
         🎰 GENERATE LUCKY NUMBERS
